@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 
 interface TopTracksDisplayProps {
     tracks: Tracks[];
-    loadMoreTracks: () => void;
+    loadMoreTracks?: () => void;
 }
 
 const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => {
@@ -97,14 +97,16 @@ const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => 
 
                 </Card>
             ))}
-            <Card className="m-2">
-                <button onClick={loadMoreTracks} className="bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                    <CardHeader className="rounded-xl items-center justify-center">
-                        <RefreshCcwDot height={200} width={100} />
-                        <CardTitle className="text-white text-center">Load More Tracks</CardTitle>
-                    </CardHeader>
-                </button>
-            </Card>
+            {loadMoreTracks && (
+                <Card className="m-2">
+                    <button onClick={loadMoreTracks} className="bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                        <CardHeader className="rounded-xl items-center justify-center">
+                            <RefreshCcwDot height={200} width={100} />
+                            <CardTitle className="text-white text-center">Load More Tracks</CardTitle>
+                        </CardHeader>
+                    </button>
+                </Card>
+            )}
             <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
         </div>
     );
