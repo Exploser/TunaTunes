@@ -1,4 +1,5 @@
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useVolume } from "@/context/VolumeContext";
 import { Tracks } from "@/types/type";
 import { RefreshCcwDot } from "lucide-react";
 import Image from "next/image";
@@ -11,8 +12,10 @@ interface TopTracksDisplayProps {
 }
 
 const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => {
+    const { volume } = useVolume();
     const [sampleColors, setSampleColors] = useState<Record<string, string>>({});
     const [hoveredTrackId, setHoveredArtistId] = useState<string | null>(null);
+    const [currentTrackId, setCurrentTrackId] = useState<string | null>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     const getColorFromImage = (imageUrl: string, artistId: string) => {
@@ -34,6 +37,30 @@ const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => 
             const color = `rgba(${pixel[0]}, ${pixel[1]}, ${pixel[2]}, 0.5)`;
             setSampleColors(prevColors => ({ ...prevColors, [artistId]: color }));
         };
+    };
+
+    const handlePlay = (trackId: string) => {
+        const audioElement = document.getElementById(`audio-${trackId}`) as HTMLAudioElement | null;
+        if (!audioElement) return;
+
+        if (currentTrackId === trackId) {
+            // Pause the current track
+            audioElement.pause();
+            setCurrentTrackId(null);
+        } else {
+            // Pause any currently playing track
+            const currentAudio = document.querySelector('audio.playing')! as HTMLAudioElement | null;
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.classList.remove('playing');
+            }
+
+            // Play the new track
+            audioElement.volume = volume;
+            audioElement.play().catch((err) => console.error(err));
+            audioElement.classList.add('playing');
+            setCurrentTrackId(trackId);
+        }
     };
 
     useEffect(() => {
@@ -63,8 +90,8 @@ const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => 
                     onMouseLeave={() => setHoveredArtistId(null)}
                 >
                     <CardHeader className="p-0">
-                        <Link href={`${track.external_urls.spotify}`} target="_blank" rel="noopener noreferrer">
-                            <div className="w-full h-48 relative">
+                        <div className="w-full h-48 relative">
+                            <Link href={`${track.external_urls.spotify}`} target="_blank" rel="noopener noreferrer">
                                 <Image
                                     src={track.album.images[0]?.url || '/default-image.jpg'}
                                     alt={track.name}
@@ -88,11 +115,19 @@ const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => 
                                         </p>
                                     </div>
                                 )}
-                            </div>
-                        </Link>
+                            </Link>
+                        </div>
                     </CardHeader>
                     <CardFooter className="border-0 p-0 justify-center items-center">
-                        <CardTitle className="text-center py-4">{removeTextInParentheses(track?.name ?? 'None')}</CardTitle>
+                        <CardTitle className="text-center py-4">
+                            <p className="font-semibold">{removeTextInParentheses(track.name)}</p>
+                            <div className="pt-2">
+                                <button className="play-button bg-blue-500 text-white px-4 py-2 rounded-md mb-2" onClick={() => handlePlay(track.id ?? '')}>
+                                    {currentTrackId === track?.id ? 'Pause' : 'Play'}
+                                </button>
+                                <audio id={`audio-${track.id}`} src={track?.preview_url} className="hidden"></audio>
+                            </div>
+                        </CardTitle>
                     </CardFooter>
 
                 </Card>
