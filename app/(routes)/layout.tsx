@@ -1,4 +1,5 @@
 import Sidebar from "@/components/sidebar";
+import { VolumeProvider } from "@/context/VolumeContext";
 import { ReactNode } from "react";
 
 const DashboardLayout = async ({
@@ -13,7 +14,9 @@ const DashboardLayout = async ({
                 </div>
             </div>
             <main className="md:pl-72">
+                <VolumeProvider>
                 {children}
+                </VolumeProvider>
             </main>
         </div>
     );
