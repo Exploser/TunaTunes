@@ -6,11 +6,11 @@ import { Disc3 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-interface TopArtistsCarouselProps {
+interface TopTracksCarouselProps {
     tracks: Tracks[];
 }
 
-const TopArtistsCarousel = ({ tracks }: TopArtistsCarouselProps) => {
+const TopTracksCarousel = ({ tracks }: TopTracksCarouselProps) => {
     return (
         <Carousel
             plugins={[
@@ -53,4 +53,4 @@ const TopArtistsCarousel = ({ tracks }: TopArtistsCarouselProps) => {
     );
 }
 
-export default TopArtistsCarousel;
+export default TopTracksCarousel;
