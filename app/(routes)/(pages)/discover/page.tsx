@@ -1,11 +1,9 @@
 'use client';
 import { Heading } from "@/components/ui/heading";
-import { Artist, SpotifyTopArtistsResponse, SpotifyTopTracksResponse, Tracks } from "@/types/type";
+import { Artist, SpotifyGenresResponse, SpotifyTopArtistsResponse, SpotifyTopTracksResponse, Tracks } from "@/types/type";
 import { useEffect, useState } from "react";
-
-interface SpotifyGenresResponse {
-    genres: string[];
-}
+import SelectTracksCarousel from "./components/select-tracks";
+import SelectArtistsCarousel from "./components/select-artists";
 
 const DiscoverPage = () => {
     const [artists, setArtist] = useState<Artist[]>([]);
@@ -142,20 +140,20 @@ const DiscoverPage = () => {
             const trackQueryString = trackIds.join(',');
             const artistQueryString = artistIds.join(',');
             const genreQueryString = selectedGenres.join(',');
-            window.location.href = `/discover?seed_tracks=${trackQueryString}&seed_artists=${artistQueryString}&seed_genres=${genreQueryString}`;
+            window.location.href = `/discover/results?seed_tracks=${trackQueryString}&seed_artists=${artistQueryString}&seed_genres=${genreQueryString}`;
         }
         if (trackIds && artistIds && !genres) {
             const trackQueryString = trackIds.join(',');
             const artistQueryString = artistIds.join(',');
-            window.location.href = `/discover?seed_tracks=${trackQueryString}&seed_artists=${artistQueryString}`;
+            window.location.href = `/discover/results?seed_tracks=${trackQueryString}&seed_artists=${artistQueryString}`;
         }
         if (trackIds && !artistIds && !genres) {
             const trackQueryString = trackIds.join(',');
-            window.location.href = `/discover?seed_tracks=${trackQueryString}`;
+            window.location.href = `/discover/results?seed_tracks=${trackQueryString}`;
         }
         if (artistIds && !trackIds && !genres) {
             const artistQueryString = artistIds.join(',');
-            window.location.href = `/discover?seed_artists=${artistQueryString}`;
+            window.location.href = `/discover/results?seed_artists=${artistQueryString}`;
         }
     };
 
