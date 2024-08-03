@@ -8,7 +8,7 @@ const VolumeController: React.FC = () => {
   };
 
   return (
-    <div className=' sticky w-[20vw] bottom-0 right-0 flex flex-row items-center p-2 bg-black bg-opacity-40 text-white'>
+    <div className='hidden sm:flex sticky w-[20vw] bottom-0 right-0 flex-row items-center p-2 bg-black bg-opacity-40 text-white'>
       <label className='whitespace-nowrap mx-2' htmlFor="volume">
         Volume: {Math.round(volume * 100)}%
       </label>
