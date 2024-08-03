@@ -3,8 +3,8 @@
 
 import { Heading } from "@/components/ui/heading";
 import { useEffect, useRef, useState } from "react";
-import TopTracksDisplay from "../../tracks/components/top-tracks";
-import { SpotifyRecommendationsResponse, SpotifyTopTracksResponse, Tracks } from "@/types/type";
+import TopTracksDisplay from "@/components/top-tracks";
+import { SpotifyRecommendationsResponse, Tracks } from "@/types/type";
 import VolumeController from "@/components/volume-controller";
 
 export default function Discover() {
