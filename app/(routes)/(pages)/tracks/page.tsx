@@ -59,6 +59,7 @@ const ArtistsPage = () => {
             default:
                 setTimeRange('short_term');
         }
+        fetchTopTracks(timeRange, limit).catch((err) => console.error(err));
     };
 
     const loadMoreTracks = () => {
