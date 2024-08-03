@@ -72,9 +72,9 @@ const ArtistsPage = () => {
             <Heading title="Top Tracks" description="Your top tracks" />
             <Tabs defaultValue="this-month" onValueChange={handleTabChange}>
                 <TabsList className="h-full w-full">
-                    <TabsTrigger value="this-month" className="text-xl px-8">This Month</TabsTrigger>
-                    <TabsTrigger value="this-year" className="text-xl px-8">This Year</TabsTrigger>
-                    <TabsTrigger value="all-time" className="text-xl px-8">All Time</TabsTrigger>
+                    <TabsTrigger value="this-month" className="md:text-xl sm:text-lg px-8">This Month</TabsTrigger>
+                    <TabsTrigger value="this-year" className="md:text-xl sm:text-lg px-8">This Year</TabsTrigger>
+                    <TabsTrigger value="all-time" className="md:text-xl sm:text-lg px-8">All Time</TabsTrigger>
                 </TabsList>
                 <TabsContent value="this-month">
                     <TopTracksDisplay tracks={tracks} loadMoreTracks={loadMoreTracks} />
