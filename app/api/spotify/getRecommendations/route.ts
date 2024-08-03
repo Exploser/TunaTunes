@@ -1,4 +1,4 @@
-// src/pages/api/spotifyAPICalls/getRecommendations.ts
+// src/app/api/spotify/getRecommendations/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
 import { parse } from 'cookie';
@@ -44,6 +44,3 @@ export const GET = async (req: NextRequest) => {
     }
   }
 };
-
-export const handler = GET;
-export default handler;
