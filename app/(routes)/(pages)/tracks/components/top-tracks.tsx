@@ -1,7 +1,8 @@
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import VolumeController from "@/components/volume-controller";
 import { useVolume } from "@/context/VolumeContext";
 import { Tracks } from "@/types/type";
-import { RefreshCcwDot } from "lucide-react";
+import { Pause, Play, RefreshCcwDot } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -60,6 +61,11 @@ const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => 
             audioElement.play().catch((err) => console.error(err));
             audioElement.classList.add('playing');
             setCurrentTrackId(trackId);
+
+            audioElement.addEventListener('ended', () => {
+                setCurrentTrackId(null);
+                audioElement.classList.remove('playing');
+            });
         }
     };
 
@@ -70,6 +76,14 @@ const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => 
             }
         });
     }, [tracks]);
+    
+    useEffect(() => {
+        // Update the volume of the currently playing track
+        const currentAudio = document.querySelector('audio.playing') as HTMLAudioElement | null;
+        if (currentAudio) {
+            currentAudio.volume = volume;
+        }
+    }, [volume]);
 
     const removeTextInParentheses = (str: string) => {
         const splitStr = str.split('(');
@@ -98,7 +112,7 @@ const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => 
                                     fill
                                     sizes="200px"
                                     objectFit="cover"
-                                    className="rounded-t-lg"
+                                    className={`${currentTrackId === track.id ? 'rotate rounded-full transition-all' : 'rounded-md transition-all'}`}
                                 />
                                 {hoveredTrackId === track.id && (
                                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-75 text-white p-4 rounded-t-lg">
@@ -121,15 +135,16 @@ const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => 
                     <CardFooter className="border-0 p-0 justify-center items-center">
                         <CardTitle className="text-center py-4">
                             <p className="font-semibold">{removeTextInParentheses(track.name)}</p>
+                            {track.preview_url && (
                             <div className="pt-2">
-                                <button className="play-button bg-blue-500 text-white px-4 py-2 rounded-md mb-2" onClick={() => handlePlay(track.id ?? '')}>
-                                    {currentTrackId === track?.id ? 'Pause' : 'Play'}
+                                <button className={`play-button bg-blue-500 text-white px-4 py-2 rounded-md mb-2`} onClick={() => handlePlay(track.id ?? '')}>
+                                    {currentTrackId === track?.id ? <Pause /> : <Play />}
                                 </button>
                                 <audio id={`audio-${track.id}`} src={track?.preview_url} className="hidden"></audio>
                             </div>
+                            )}
                         </CardTitle>
                     </CardFooter>
-
                 </Card>
             ))}
             {loadMoreTracks && (
