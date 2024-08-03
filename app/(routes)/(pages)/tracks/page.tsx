@@ -86,6 +86,7 @@ const ArtistsPage = () => {
                     <TopTracksDisplay tracks={tracks} loadMoreTracks={loadMoreTracks} />
                 </TabsContent>
             </Tabs>
+            <VolumeController />
         </div>
     );
 }
