@@ -5,6 +5,7 @@ import { Heading } from "@/components/ui/heading";
 import { useEffect, useRef, useState } from "react";
 import TopTracksDisplay from "../../tracks/components/top-tracks";
 import { SpotifyRecommendationsResponse, SpotifyTopTracksResponse, Tracks } from "@/types/type";
+import VolumeController from "@/components/volume-controller";
 
 export default function Discover() {
     const [tracks, setTracks] = useState<Tracks[]>([]);
@@ -102,6 +103,7 @@ export default function Discover() {
             <div className="max-w-screen-lg h-full w-fit text-white">
                 <TopTracksDisplay tracks={tracks} />
             </div>
+            <VolumeController />
         </section>
     );
 }
