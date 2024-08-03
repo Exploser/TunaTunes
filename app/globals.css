@@ -79,7 +79,6 @@ body,
   visibility: hidden;
 }
 
-
 .rotate {
   animation: rotate 2s linear infinite;
 }

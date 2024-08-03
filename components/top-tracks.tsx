@@ -104,16 +104,15 @@ const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => 
                     onMouseLeave={() => setHoveredArtistId(null)}
                 >
                     <CardHeader className="p-0">
-                        <div className="w-full h-48 relative">
+                        <div className="w-full h-72 sm:h-48 relative">
                             <Link href={`${track.external_urls.spotify}`} target="_blank" rel="noopener noreferrer">
-                                <Image
-                                    src={track.album.images[0]?.url || '/default-image.jpg'}
-                                    alt={track.name}
-                                    fill
-                                    sizes="200px"
-                                    objectFit="cover"
-                                    className={`${currentTrackId === track.id ? 'rotate rounded-full transition-all' : 'rounded-md transition-all'}`}
-                                />
+                                    <Image
+                                        src={track.album.images[0]?.url || '/default-image.jpg'}
+                                        alt={track.name}
+                                        fill
+                                        objectFit="cover"
+                                        className={`${currentTrackId === track.id ? 'rotate rounded-full transition-all' : 'rounded-md transition-all'}`}
+                                    />
                                 {hoveredTrackId === track.id && (
                                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-75 text-white p-4 rounded-t-lg">
                                         <h3 className="text-sm font-semibold">Artists: </h3>
