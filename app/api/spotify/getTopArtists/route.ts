@@ -1,17 +1,14 @@
 // src/app/api/spotifyAPICalls/getTopArtists/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
-import { parse } from 'cookie';
 import { fetchSpotifyTopArtists } from '@/lib/spotify';
+import { cookies } from 'next/headers';
 
 export async function GET(req: NextRequest) {
   try {
-    console.log('GET /api/spotify/getTopArtists');
-    const cookies = req.headers.get('cookie');
-    if (!cookies) throw new Error('No cookies found');
+    const cookieData = cookies().get('spotify_access_token');
 
-    const parsedCookies = parse(cookies);
-    const accessToken = parsedCookies.spotify_access_token;
+    const accessToken = cookieData?.value
     if (!accessToken) throw new Error('Spotify access token not found');
 
     // Get query parameters

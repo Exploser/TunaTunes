@@ -1,16 +1,14 @@
 // src/app/api/spotify/getRecommendations/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
-import { parse } from 'cookie';
 import { fetchSpotifyRecommendations, fetchSpotifyToken } from '@/lib/spotify';
+import { cookies } from 'next/headers';
 
 export const GET = async (req: NextRequest) => {
   try {
-    const cookies = req.headers.get('cookie');
-    if (!cookies) throw new Error('No cookies found');
+    const cookieData = cookies().get('spotify_access_token');
 
-    const parsedCookies = parse(cookies);
-    let accessToken = parsedCookies.spotify_access_token;
+    let accessToken = cookieData?.value
     if (!accessToken) {
       try {
         accessToken = await fetchSpotifyToken();

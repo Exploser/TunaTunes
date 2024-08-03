@@ -1,4 +1,3 @@
-
 import { NextRequest, NextResponse } from 'next/server';
 import { parse } from 'cookie';
 import { fetchSpotifyTopTracks } from '@/lib/spotify';
