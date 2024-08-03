@@ -17,10 +17,6 @@ export async function GET(req: NextRequest) {
     const limit = parseInt(url.searchParams.get('limit') || '20', 10);
     const offset = parseInt(url.searchParams.get('offset') || '0', 10);
 
-    console.log('time_range:', time_range);
-    console.log('limit:', limit);
-    console.log('offset:', offset);
-
     const topTracks = await fetchSpotifyTopTracks(accessToken, time_range, limit, offset);
     return NextResponse.json(topTracks, { status: 200 });
   } catch (error) {

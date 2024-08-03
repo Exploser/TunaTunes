@@ -16,11 +16,7 @@ export async function GET(req: NextRequest) {
     const time_range = url.searchParams.get('time_range') || 'medium_term';
     const limit = parseInt(url.searchParams.get('limit') || '20');
     const offset = parseInt(url.searchParams.get('offset') || '0');
-
-    console.log('time_range:', time_range);
-    console.log('limit:', limit);
-    console.log('offset:', offset);
-
+    
     const topArtists = await fetchSpotifyTopArtists(accessToken, time_range, limit, offset);
 
     return NextResponse.json(topArtists, { status: 200 });
