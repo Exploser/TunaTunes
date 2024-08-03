@@ -1,3 +1,4 @@
+import MobileSidebar from "@/components/mobile-sidebar";
 import Sidebar from "@/components/sidebar";
 import { VolumeProvider } from "@/context/VolumeContext";
 import { ReactNode } from "react";
@@ -15,7 +16,10 @@ const DashboardLayout = async ({
             </div>
             <main className="md:pl-72">
                 <VolumeProvider>
-                {children}
+                    <div className="md:hidden sm:sticky top-0 left-0">
+                        <MobileSidebar />
+                    </div>
+                        {children}
                 </VolumeProvider>
             </main>
         </div>
