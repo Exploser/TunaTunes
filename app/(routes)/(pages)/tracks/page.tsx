@@ -2,9 +2,9 @@
 import { Tabs, TabsTrigger, TabsList, TabsContent } from "@/components/ui/tabs";
 import { SpotifyTopTracksResponse, Tracks } from "@/types/type";
 import { useEffect, useState } from "react";
-import TopTracksDisplay from "./components/top-tracks";
+import TopTracksDisplay from "@/components/top-tracks";
 import { Heading } from "@/components/ui/heading";
-// import TopArtistsDisplay from "./components/top-tracks";
+import VolumeController from "@/components/volume-controller";
 
 const ArtistsPage = () => {
     const [error, setError] = useState<string | null>(null);
