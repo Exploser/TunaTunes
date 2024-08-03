@@ -76,7 +76,7 @@ const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => 
             }
         });
     }, [tracks]);
-    
+
     useEffect(() => {
         // Update the volume of the currently playing track
         const currentAudio = document.querySelector('audio.playing') as HTMLAudioElement | null;
@@ -136,12 +136,12 @@ const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => 
                         <CardTitle className="text-center py-4">
                             <p className="font-semibold">{removeTextInParentheses(track.name)}</p>
                             {track.preview_url && (
-                            <div className="pt-2">
-                                <button className={`play-button bg-blue-500 text-white px-4 py-2 rounded-md mb-2`} onClick={() => handlePlay(track.id ?? '')}>
-                                    {currentTrackId === track?.id ? <Pause /> : <Play />}
-                                </button>
-                                <audio id={`audio-${track.id}`} src={track?.preview_url} className="hidden"></audio>
-                            </div>
+                                <div className="pt-2">
+                                    <button className={`play-button bg-blue-500 text-white px-4 py-2 rounded-md mb-2`} onClick={() => handlePlay(track.id ?? '')}>
+                                        {currentTrackId === track?.id ? <Pause /> : <Play />}
+                                    </button>
+                                    <audio id={`audio-${track.id}`} src={track?.preview_url} className="hidden"></audio>
+                                </div>
                             )}
                         </CardTitle>
                     </CardFooter>
