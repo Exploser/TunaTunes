@@ -36,14 +36,15 @@ const ArtistsPage = () => {
             if (err instanceof Error) {
                 setError(err.message);
             }
+            console.log(error);
+            return error;
         }
-        console.log(error);
-        return error;
+        return null;
     };
 
     useEffect(() => {
         fetchTopTracks(timeRange, limit).catch((err) => console.error(err));
-    }, []);
+    }, [timeRange, limit]);
 
     const handleTabChange = (value: string) => {
         switch (value) {
@@ -59,12 +60,10 @@ const ArtistsPage = () => {
             default:
                 setTimeRange('short_term');
         }
-        fetchTopTracks(timeRange, limit).catch((err) => console.error(err));
     };
 
     const loadMoreTracks = () => {
         setLimit(prevLimit => prevLimit + 10);
-        fetchTopTracks(timeRange, limit).catch((err) => console.error(err));
     };
 
     return (
