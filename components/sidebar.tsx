@@ -53,7 +53,7 @@ const routes = [
 const Sidebar = () => {
     const pathname = usePathname();
     return (
-        <div className="space-y-4 py-4 flex flex-col h-[100vh] bg-[#501069] text-white justify-between ">
+        <div className="space-y-4 py-4 flex flex-col h-[100vh] bg-[#501069] text-white justify-between z-0">
             <div className="px-3 py-2 flex-1">
                 <Link href={"/"} className="flex items-center pl-3 mb-14">
                     <div className="relative w-8 h-8 mr-4">

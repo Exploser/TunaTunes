@@ -76,18 +76,18 @@ const DashboardPage = () => {
     }, []);
 
     return (
-        <div className="min-h-full">
+        <div className="h-full w-full z-10">
             <Heading title="Dashboard" description="Find all your top items" />
             <h3 className="font-bold text-2xl py-8 px-4"> Hello, </h3>
             <div className="flex justify-center items-center w-full">
                 <SpotifyProfile />
             </div>
             <h3 className="font-bold text-2xl py-8 px-4"> Top Artists</h3>
-            <div className="w-fit">
+            <div className="w-full">
                 <TopArtistsCarousel artists={artists} />
             </div>
             <h3 className="font-bold text-2xl py-8 px-4"> Top Tracks</h3>
-            <div className="w-fit">
+            <div className="w-full">
                 <TopTracksCarousel tracks={tracks} />
             </div>
         </div>
