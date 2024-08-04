@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { AudioWaveform, History, LayoutDashboard, MessageSquare, MicVocal, Music, Settings, VideoIcon } from "lucide-react";
+import { AudioWaveform, BookText, History, LayoutDashboard, MessageSquare, MicVocal, Music, Settings, VideoIcon } from "lucide-react";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
@@ -44,9 +44,9 @@ const routes = [
         color: 'text-emerald-500',
     },
     {
-        label: "Settings",
-        icon: Settings,
-        href: "/settings",
+        label: "About",
+        icon: BookText,
+        href: "/about",
     },
 ];
 
