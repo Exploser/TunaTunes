@@ -158,19 +158,19 @@ const DiscoverPage = () => {
     };
 
     return (
-        <div>
+        <div className="w-full">
             <Heading title="Discover" description="Find New music based on the tracks and artists you like, Choose Upto 5 Items" />
             <div className="flex flex-col items-start justify-between p-4 pb-0">
                 <h2 className="text-3xl font-bold tracking-tight text-slate-600">
                     Choose Tracks,
                 </h2>
-                <div className="max-w-screen-lg h-full w-fit my-8 text-white">
+                <div className="h-full w-full my-8 text-white">
                     <SelectTracksCarousel tracks={tracks} handleSelect={handleSelect} selectedTrackIds={selectedTrackIds} />
                 </div>
                 <h2 className="text-3xl font-bold tracking-tight text-slate-600">
                     Choose Artists,
                 </h2>
-                <div className="max-w-screen-lg h-full w-fit my-8 text-white">
+                <div className="h-full w-full my-8 text-white">
                     <SelectArtistsCarousel artists={artists} handleSelect={handleSelect} selectedArtistsIds={selectedArtistIds} />
                 </div>
                 <h2 className="text-3xl font-bold tracking-tight text-slate-600">
