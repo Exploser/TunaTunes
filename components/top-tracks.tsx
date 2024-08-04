@@ -106,28 +106,32 @@ const TopTracksDisplay = ({ tracks, loadMoreTracks }: TopTracksDisplayProps) => 
                     <CardHeader className="p-0">
                         <div className="w-full h-72 sm:h-48 relative">
                             <Link href={`${track.external_urls.spotify}`} target="_blank" rel="noopener noreferrer">
+                                <div className="relative w-full h-full">
                                     <Image
                                         src={track.album.images[0]?.url || '/default-image.jpg'}
                                         alt={track.name}
                                         fill
-                                        objectFit="cover"
+                                        priority
+                                        sizes="200px"
+                                        style={{ objectFit: 'cover' }}
                                         className={`${currentTrackId === track.id ? 'rotate rounded-full transition-all' : 'rounded-md transition-all'}`}
                                     />
-                                {hoveredTrackId === track.id && (
-                                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-75 text-white p-4 rounded-t-lg">
-                                        <h3 className="text-sm font-semibold">Artists: </h3>
-                                        <p className="font-semibold"> {track.artists.map(artists => artists.name).join(', ')}</p>
-                                        <p className="text-sm mt-6">
-                                            Release Date: {track.album.release_date.toLocaleString()}
-                                        </p>
-                                        <p className="text-sm">
-                                            Album: {track.album.name}
-                                        </p>
-                                        <p className="text-sm">
-                                            Track: {`${track.track_number} of ${track.album.total_tracks}`}
-                                        </p>
-                                    </div>
-                                )}
+                                    {hoveredTrackId === track.id && (
+                                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-75 text-white p-4 rounded-t-lg">
+                                            <h3 className="text-sm font-semibold">Artists: </h3>
+                                            <p className="font-semibold"> {track.artists.map(artists => artists.name).join(', ')}</p>
+                                            <p className="text-sm mt-6">
+                                                Release Date: {track.album.release_date.toLocaleString()}
+                                            </p>
+                                            <p className="text-sm">
+                                                Album: {track.album.name}
+                                            </p>
+                                            <p className="text-sm">
+                                                Track: {`${track.track_number} of ${track.album.total_tracks}`}
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
                             </Link>
                         </div>
                     </CardHeader>
