@@ -29,6 +29,11 @@ TunaTunes is a dynamic web application that leverages the power of Spotify's API
 Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
 
+### Screenshots
+
+![TunaTunes](https://github.com/user-attachments/assets/4cd6cee8-8b40-4765-a29e-c231e07f227b)
+
+
 
 ### Prerequisites
 
